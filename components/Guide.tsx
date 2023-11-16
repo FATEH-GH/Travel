@@ -1,15 +1,18 @@
-"use client"
+"use client";
 
 import Image from "next/image";
 import Lottie from "lottie-react";
-import animation from "../public/Animation.json"
+import animation from "../public/Animation.json";
 
+import { Waypoint } from "react-waypoint";
+import React, { useState } from "react";
 
 const Guide = () => {
-  const style ={
-    height:400,
-    width:200
-  }
+  const style = {
+    height: 400,
+    width: 200,
+  };
+  let [renderLottie, setRenderLottie] = useState(false);
   return (
     <section className="flexCenter flex-col">
       <div className="padding-container max-container w-full ">
@@ -38,9 +41,11 @@ const Guide = () => {
           className="w-full object-cover object-center lg:rounded-5xl"
         />
         <div className="absolute flex bg-white py-8 pl-5 pr-7 gap-3 rounded-3xl border shadow-md md:left-[5%] lg:top-20">
-          
-          <Lottie  style={style}  animationData={animation} loop={5} />
-          
+          <Waypoint onEnter={() => setRenderLottie(true)} />
+          {renderLottie && (
+            <Lottie style={style} animationData={animation} loop={5} />
+          )}
+
           <div className="flex gap-24 flex-col pt-16">
             <div className="flex w-full flex-col ">
               <div className="flexBetween w-full">
